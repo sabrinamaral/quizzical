@@ -1,15 +1,19 @@
 {
   "name": "quizzical",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "homepage": "https://sabrinamaral.github.io/quizzical/",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "gh-pages": "^6.3.0",
     "html-entities": "^2.6.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
