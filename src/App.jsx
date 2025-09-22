@@ -5,13 +5,17 @@ import Start from "./Start";
 export default function App() {
   const [start, setStart] = useState(false);
   function handleStart() {
-    setStart(true);
+    setStart((prev) => !prev);
   }
   return (
     <main>
       <div className="upper-geometric-shape"></div>
       <div className="lower-geometric-shape"></div>
-      {start ? <Questions /> : <Start handleStart={handleStart} />}
+      {start ? (
+        <Questions handleStart={handleStart} />
+      ) : (
+        <Start handleStart={handleStart} />
+      )}
     </main>
   );
 }
