@@ -2,12 +2,13 @@ import { decode } from "html-entities";
 import { useEffect, useState } from "react";
 import { shuffleArray } from "./utils";
 
-export default function Questions() {
+export default function Questions(props) {
   const [data, setData] = useState([]);
   const [shuffledAnswer, setShuffledAnswer] = useState([]);
   const [userAnswer, setUserAnswer] = useState({});
   const [showCorrects, setShowCorrects] = useState(false);
   const [answerCheck, setAnswerCheck] = useState([]);
+  const [error, setError] = useState(null);
 
   // FETCH DATA IN THE TRIVIA API
   useEffect(() => {
@@ -29,7 +30,8 @@ export default function Questions() {
           ),
         }));
         setData(decodedData);
-      });
+      })
+      .catch(() => setError("Something went wrong. Please try again later."));
   }
 
   // SHUFFLE THE ANSWERS
@@ -57,10 +59,10 @@ export default function Questions() {
 
   // RESET THE GAME
   function resetGame() {
+    props.handleStart();
     setUserAnswer({});
     setShowCorrects(false);
     setAnswerCheck([]);
-    fetchQuestions();
   }
   // RENDER DATA FROM THE API
   const questionsElements = data.map((elem, index) => {
@@ -110,8 +112,8 @@ export default function Questions() {
 
   return (
     <>
-      <section>{questionsElements}</section>
-      {showCorrects ? (
+      {error ? <p>{error}</p> : <section>{questionsElements}</section>}
+      {showCorrects || error ? (
         <button className="check-answers" onClick={resetGame}>
           Play again
         </button>
