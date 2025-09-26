@@ -7,13 +7,14 @@
 
 main {
   position: relative;
-  height: calc(100vh - 4rem);
+  min-height: calc(100vh - 4rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 2rem;
+  margin: 1rem;
 }
+
 /* START PAGE */
 
 main > section.start {
@@ -37,7 +38,7 @@ main > section.start p {
 main > section.start > button {
   background-color: #4d5b9e;
   color: #f5f7fb;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 15px;
   padding: 0.8rem 3.5rem;
 }
@@ -47,9 +48,8 @@ main > section.start > button {
 main > section > .quiz-content {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   font-family: "Karla", sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   color: #293264;
   border-bottom: #dbdef0 solid 1px;
@@ -134,4 +134,21 @@ button:disabled {
   left: -100px;
   transform: rotate(-50deg);
   z-index: -10;
+}
+
+@media screen and (max-width: 500px) {
+  main > section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  main > section > .quiz-content section.answers {
+    display: block;
+  }
+
+  main > section > .quiz-content section.answers button {
+    padding-inline: 8px;
+    margin-right: 6px;
+  }
 }
